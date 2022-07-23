@@ -1,0 +1,13 @@
+table{
+    width: 590px!important;
+
+}
+
+@media screen and (max-width: 640px) {
+    .date-box {
+        width: 100% !important;
+    }
+    table{
+        overflow-x: scroll;
+    }
+}
