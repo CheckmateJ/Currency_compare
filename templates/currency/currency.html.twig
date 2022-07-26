@@ -1,26 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}Porównanie kursów walut {% endblock %}
 
 {% block body %}
     <section class="container">
         <div class="w-25 me-auto ms-auto text-center mt-5 date-box">
-            <label class="mb-3" for="date">Wprowadź interesującą Ciebie datę</label><input class="form-control" type="text" id="date" placeholder="YYYY-MM-DD" />
-            <button class="btn btn-primary mt-3" id="show_table">Pokaż kursy walut</button>
-        </div>
-        <div class="d-flex justify-content-center mt-4">
-            <table class="table table-hover d-none">
-                <thead>
-                <tr>
-                    <th scope="col">Waluta</th>
-                    <th scope="col">Kurs z dziś {{ "now"|date("m/d/Y") }}</th>
-                    <th scope="col" class="course-date" >Kurs ze wskazanej daty</th>
-                    <th scope="col">Zmiana procentowa</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            <form action="{{path('currency_fetch')}}" method="get">
+                <label class="mb-3" for="date">Wprowadź interesującą Ciebie datę</label><input class="form-control" type="text" id="date" placeholder="YYYY-MM-DD" name="date" />
+                <button type="submit" class="btn btn-primary mt-3" id="show_table">Pokaż kursy walut</button>
+            </form>
         </div>
     </section>
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-danger text-center mt-3" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
 {% endblock %}

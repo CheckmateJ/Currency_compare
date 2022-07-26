@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="container">
+        <div class="d-flex justify-content-center mt-4">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Waluta</th>
+                    <th scope="col">Kurs z dziś {{ "now"|date("m/d/Y") }}</th>
+                    <th scope="col" class="course-date">Kurs z {{date}}</th>
+                    <th scope="col">Zmiana procentowa</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, currencies in currenciesFromUserDate.rates %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ currenciesFromToday.rates[key] }}</td>
+                        <td>{{ currencies }}</td>
+                        <td>{{ (currenciesFromToday.rates[key] - currencies) / currenciesFromToday.rates[key] * 100 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('currency_compare') }}"
+           class="btn btn-primary mt-3 me-auto ms-auto d-flex justify-content-center w-25">Powrót</a>
+    </section>
+{% endblock %}
